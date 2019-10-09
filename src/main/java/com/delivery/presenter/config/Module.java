@@ -1,5 +1,6 @@
 package com.delivery.presenter.config;
 
+import com.delivery.core.usecases.helpers.ProductAccess;
 import com.delivery.core.usecases.order.DeleteOrderUseCase;
 import com.delivery.core.usecases.order.DeliveryOrderUseCase;
 import com.delivery.core.usecases.order.GetOrderUseCase;
@@ -55,14 +56,18 @@ public class Module {
     }
 
     @Bean
-    public CreateOrderUseCase createOrderUseCase(GetProductsByStoreAndProductsIdUseCase getProductsByStoreAndProductsIdUseCase,
-                                                 OrderRepository repository) {
-        return new CreateOrderUseCase(getProductsByStoreAndProductsIdUseCase, repository);
+    public CreateOrderUseCase createOrderUseCase(OrderRepository repository, ProductAccess productAccess) {
+        return new CreateOrderUseCase(repository, productAccess);
     }
 
     @Bean
-    public GetProductsByStoreAndProductsIdUseCase getProductsByStoreAndProductsIdUseCase(ProductRepository repository) {
-        return new GetProductsByStoreAndProductsIdUseCase(repository);
+    public ProductAccess productFetcher(ProductRepository productRepository) {
+        return new ProductAccess(productRepository);
+    }
+
+    @Bean
+    public GetProductsByStoreAndProductsIdUseCase getProductsByStoreAndProductsIdUseCase(ProductAccess productAccess) {
+        return new GetProductsByStoreAndProductsIdUseCase(productAccess);
     }
 
     @Bean

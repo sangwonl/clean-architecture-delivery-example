@@ -5,6 +5,7 @@ import com.delivery.core.domain.Identity;
 import com.delivery.core.domain.Order;
 import com.delivery.core.domain.Product;
 import com.delivery.core.entities.TestCoreEntityGenerator;
+import com.delivery.core.usecases.helpers.ProductAccess;
 import com.delivery.core.usecases.product.GetProductsByStoreAndProductsIdUseCase;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +28,7 @@ public class CreateOrderUseCaseTest {
     private CreateOrderUseCase useCase;
 
     @Mock
-    private GetProductsByStoreAndProductsIdUseCase getProductsByStoreAndProductsIdUseCase;
+    private ProductAccess productAccess;
 
     @Mock
     private OrderRepository orderRepository;
@@ -39,14 +40,8 @@ public class CreateOrderUseCaseTest {
         CreateOrderUseCase.InputItem useCaseInputItem =
                 new CreateOrderUseCase.InputItem(randomId(), randomQuantity());
 
-        GetProductsByStoreAndProductsIdUseCase.InputValues getProductsInput =
-                new GetProductsByStoreAndProductsIdUseCase.InputValues(storeId, singletonList(useCaseInputItem.getId()));
-
         Product product = TestCoreEntityGenerator.randomProduct();
         product.setId(useCaseInputItem.getId());
-
-        GetProductsByStoreAndProductsIdUseCase.OutputValues getProductsOutput =
-                new GetProductsByStoreAndProductsIdUseCase.OutputValues(singletonList(product));
 
         Customer customer = TestCoreEntityGenerator.randomCustomer();
 
@@ -56,9 +51,9 @@ public class CreateOrderUseCaseTest {
         Order expected = TestCoreEntityGenerator.randomOrder();
 
         // and
-        doReturn(getProductsOutput)
-                .when(getProductsByStoreAndProductsIdUseCase)
-                .execute(eq(getProductsInput));
+        doReturn(singletonList(product))
+                .when(productAccess)
+                .getProducts(eq(storeId), eq(singletonList(useCaseInputItem.getId())));
 
         // and
         doReturn(expected)

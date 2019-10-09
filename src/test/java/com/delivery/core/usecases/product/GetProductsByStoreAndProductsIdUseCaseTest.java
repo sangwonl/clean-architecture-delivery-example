@@ -4,6 +4,8 @@ import com.delivery.core.domain.Identity;
 import com.delivery.core.domain.NotFoundException;
 import com.delivery.core.domain.Product;
 import com.delivery.core.entities.TestCoreEntityGenerator;
+import com.delivery.core.usecases.helpers.ProductAccess;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -21,12 +23,18 @@ import static org.mockito.Mockito.doReturn;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GetProductsByStoreAndProductsIdUseCaseTest {
+    private GetProductsByStoreAndProductsIdUseCase useCase;
 
     @InjectMocks
-    private GetProductsByStoreAndProductsIdUseCase useCase;
+    private ProductAccess productAccess;
 
     @Mock
     private ProductRepository repository;
+
+    @Before
+    public void setUp() {
+        this.useCase = new GetProductsByStoreAndProductsIdUseCase(productAccess);
+    }
 
     @Test
     public void executeReturnsOutputValues() {

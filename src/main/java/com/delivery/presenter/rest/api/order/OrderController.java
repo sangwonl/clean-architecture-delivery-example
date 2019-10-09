@@ -63,7 +63,7 @@ public class OrderController implements OrderResource {
     public CompletableFuture<ApiResponse> delete(@PathVariable Long id) {
         return useCaseExecutor.execute(
                 deleteOrderUseCase,
-                new DeleteOrderUseCase.InputValues(new Identity(id)),
+                new UpdateOrderUseCase.InputValues(new Identity(id)),
                 (outputValues) -> new ApiResponse(true, "Order successfully canceled")
         );
     }
@@ -72,7 +72,7 @@ public class OrderController implements OrderResource {
     public CompletableFuture<ApiResponse> pay(@PathVariable Long id) {
         return useCaseExecutor.execute(
                 payOrderUseCase,
-                new DeleteOrderUseCase.InputValues(new Identity(id)),
+                new UpdateOrderUseCase.InputValues(new Identity(id)),
                 (outputValues) -> new ApiResponse(true, "Order successfully paid")
         );
     }
@@ -81,7 +81,7 @@ public class OrderController implements OrderResource {
     public CompletableFuture<ApiResponse> delivery(@PathVariable Long id) {
         return useCaseExecutor.execute(
                 deliveryOrderUseCase,
-                new DeleteOrderUseCase.InputValues(new Identity(id)),
+                new UpdateOrderUseCase.InputValues(new Identity(id)),
                 (outputValues) -> new ApiResponse(true, "Order successfully delivered")
         );
     }
