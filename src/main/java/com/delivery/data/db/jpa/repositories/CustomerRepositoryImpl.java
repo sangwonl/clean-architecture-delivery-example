@@ -3,17 +3,15 @@ package com.delivery.data.db.jpa.repositories;
 import com.delivery.core.domain.Customer;
 import com.delivery.core.usecases.customer.CustomerRepository;
 import com.delivery.data.db.jpa.entities.CustomerData;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
+@RequiredArgsConstructor
 public class CustomerRepositoryImpl implements CustomerRepository {
-    private JpaCustomerRepository repository;
-
-    public CustomerRepositoryImpl(JpaCustomerRepository repository) {
-        this.repository = repository;
-    }
+    private final JpaCustomerRepository repository;
 
     @Override
     public Customer persist(Customer customer) {

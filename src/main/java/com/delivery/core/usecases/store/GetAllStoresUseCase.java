@@ -2,16 +2,14 @@ package com.delivery.core.usecases.store;
 
 import com.delivery.core.domain.Store;
 import com.delivery.core.usecases.UseCase;
+import lombok.RequiredArgsConstructor;
 import lombok.Value;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 public class GetAllStoresUseCase extends UseCase<GetAllStoresUseCase.InputValues, GetAllStoresUseCase.OutputValues> {
-    private StoreRepository repository;
-
-    public GetAllStoresUseCase(StoreRepository repository) {
-        this.repository = repository;
-    }
+    private final StoreRepository repository;
 
     @Override
     public OutputValues execute(InputValues input) {

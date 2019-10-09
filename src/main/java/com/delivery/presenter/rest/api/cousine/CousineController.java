@@ -7,6 +7,7 @@ import com.delivery.core.usecases.cousine.GetStoresByCousineUseCase;
 import com.delivery.core.usecases.cousine.SearchCousineByNameUseCase;
 import com.delivery.presenter.rest.api.entities.CousineResponse;
 import com.delivery.presenter.rest.api.entities.StoreResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -14,21 +15,12 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @Component
+@RequiredArgsConstructor
 public class CousineController implements CousineResource {
-    private UseCaseExecutor useCaseExecutor;
-    private GetAllCousinesUseCase getAllCousinesUseCase;
-    private GetStoresByCousineUseCase getStoresByCousineUseCase;
-    private SearchCousineByNameUseCase searchCousineByNameUseCase;
-
-    public CousineController(UseCaseExecutor useCaseExecutor,
-                             GetAllCousinesUseCase getAllCousinesUseCase,
-                             GetStoresByCousineUseCase getStoresByCousineUseCase,
-                             SearchCousineByNameUseCase searchCousineByNameUseCase) {
-        this.useCaseExecutor = useCaseExecutor;
-        this.getAllCousinesUseCase = getAllCousinesUseCase;
-        this.getStoresByCousineUseCase = getStoresByCousineUseCase;
-        this.searchCousineByNameUseCase = searchCousineByNameUseCase;
-    }
+    private final UseCaseExecutor useCaseExecutor;
+    private final GetAllCousinesUseCase getAllCousinesUseCase;
+    private final GetStoresByCousineUseCase getStoresByCousineUseCase;
+    private final SearchCousineByNameUseCase searchCousineByNameUseCase;
 
     @Override
     public CompletableFuture<List<StoreResponse>> getStoresByCousineId(@PathVariable Long id) {

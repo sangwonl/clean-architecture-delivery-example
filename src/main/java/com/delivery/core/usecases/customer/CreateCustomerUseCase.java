@@ -3,14 +3,12 @@ package com.delivery.core.usecases.customer;
 import com.delivery.core.domain.Customer;
 import com.delivery.core.domain.EmailAlreadyUsedException;
 import com.delivery.core.usecases.UseCase;
+import lombok.RequiredArgsConstructor;
 import lombok.Value;
 
+@RequiredArgsConstructor
 public class CreateCustomerUseCase extends UseCase<CreateCustomerUseCase.InputValues, CreateCustomerUseCase.OutputValues> {
-    private CustomerRepository repository;
-
-    public CreateCustomerUseCase(CustomerRepository repository) {
-        this.repository = repository;
-    }
+    private final CustomerRepository repository;
 
     @Override
     public OutputValues execute(InputValues input) {

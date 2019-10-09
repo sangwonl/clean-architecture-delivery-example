@@ -4,14 +4,12 @@ import com.delivery.core.domain.Identity;
 import com.delivery.core.domain.NotFoundException;
 import com.delivery.core.domain.Store;
 import com.delivery.core.usecases.UseCase;
+import lombok.RequiredArgsConstructor;
 import lombok.Value;
 
+@RequiredArgsConstructor
 public class GetStoreUseCase extends UseCase<GetStoreUseCase.InputValues, GetStoreUseCase.OutputValues> {
-    private StoreRepository repository;
-
-    public GetStoreUseCase(StoreRepository repository) {
-        this.repository = repository;
-    }
+    private final StoreRepository repository;
 
     @Override
     public OutputValues execute(InputValues input) {

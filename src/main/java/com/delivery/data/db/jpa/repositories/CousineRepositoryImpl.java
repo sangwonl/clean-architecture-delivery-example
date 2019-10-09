@@ -6,19 +6,16 @@ import com.delivery.core.domain.Store;
 import com.delivery.core.usecases.cousine.CousineRepository;
 import com.delivery.data.db.jpa.entities.CousineData;
 import com.delivery.data.db.jpa.entities.StoreData;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Repository
+@RequiredArgsConstructor
 public class CousineRepositoryImpl implements CousineRepository {
-
-    private JpaCousineRepository jpaCousineRepository;
-
-    public CousineRepositoryImpl(JpaCousineRepository jpaCousineRepository) {
-        this.jpaCousineRepository = jpaCousineRepository;
-    }
+    private final JpaCousineRepository jpaCousineRepository;
 
     @Override
     public List<Store> getStoresById(Identity id) {

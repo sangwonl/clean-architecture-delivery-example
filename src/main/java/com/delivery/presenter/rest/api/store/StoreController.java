@@ -8,6 +8,7 @@ import com.delivery.core.usecases.store.GetStoreUseCase;
 import com.delivery.core.usecases.store.SearchStoresByNameUseCase;
 import com.delivery.presenter.rest.api.entities.ProductResponse;
 import com.delivery.presenter.rest.api.entities.StoreResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -15,25 +16,14 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @Component
+@RequiredArgsConstructor
 public class StoreController implements StoreResource {
 
-    private UseCaseExecutor useCaseExecutor;
-    private GetAllStoresUseCase getAllStoresUseCase;
-    private SearchStoresByNameUseCase searchStoresByNameUseCase;
-    private GetStoreUseCase getStoreUseCase;
-    private GetProductsByStoreUseCase getProductsByStoreUseCase;
-
-    public StoreController(UseCaseExecutor useCaseExecutor,
-                           GetAllStoresUseCase getAllStoresUseCase,
-                           SearchStoresByNameUseCase searchStoresByNameUseCase,
-                           GetStoreUseCase getStoreUseCase,
-                           GetProductsByStoreUseCase getProductsByStoreUseCase) {
-        this.useCaseExecutor = useCaseExecutor;
-        this.getAllStoresUseCase = getAllStoresUseCase;
-        this.searchStoresByNameUseCase = searchStoresByNameUseCase;
-        this.getStoreUseCase = getStoreUseCase;
-        this.getProductsByStoreUseCase = getProductsByStoreUseCase;
-    }
+    private final UseCaseExecutor useCaseExecutor;
+    private final GetAllStoresUseCase getAllStoresUseCase;
+    private final SearchStoresByNameUseCase searchStoresByNameUseCase;
+    private final GetStoreUseCase getStoreUseCase;
+    private final GetProductsByStoreUseCase getProductsByStoreUseCase;
 
     @Override
     public CompletableFuture<List<StoreResponse>> getAll() {

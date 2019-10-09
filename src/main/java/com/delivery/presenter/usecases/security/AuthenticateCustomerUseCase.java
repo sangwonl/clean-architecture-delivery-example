@@ -1,6 +1,7 @@
 package com.delivery.presenter.usecases.security;
 
 import com.delivery.core.usecases.UseCase;
+import lombok.RequiredArgsConstructor;
 import lombok.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -8,15 +9,10 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor
 public class AuthenticateCustomerUseCase extends UseCase<AuthenticateCustomerUseCase.InputValues, AuthenticateCustomerUseCase.OutputValues> {
-    private AuthenticationManager authenticationManager;
-    private JwtProvider jwtProvider;
-
-    public AuthenticateCustomerUseCase(AuthenticationManager authenticationManager,
-                                       JwtProvider jwtProvider) {
-        this.authenticationManager = authenticationManager;
-        this.jwtProvider = jwtProvider;
-    }
+    private final AuthenticationManager authenticationManager;
+    private final JwtProvider jwtProvider;
 
     @Override
     public OutputValues execute(InputValues input) {

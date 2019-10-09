@@ -7,7 +7,8 @@ import com.delivery.core.domain.OrderItem;
 import com.delivery.core.domain.Product;
 import com.delivery.core.domain.Store;
 import com.delivery.core.usecases.UseCase;
-import com.delivery.core.usecases.product.GetProductsByStoreAndProductsIdUseCase;
+import com.delivery.core.usecases.helpers.ProductAccess;
+import lombok.RequiredArgsConstructor;
 import lombok.Value;
 
 import java.util.List;
@@ -15,15 +16,10 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+@RequiredArgsConstructor
 public class CreateOrderUseCase extends UseCase<CreateOrderUseCase.InputValues, CreateOrderUseCase.OutputValues> {
-    private GetProductsByStoreAndProductsIdUseCase getProductsByStoreAndProductsIdUseCase;
-    private OrderRepository orderRepository;
-
-    public CreateOrderUseCase(GetProductsByStoreAndProductsIdUseCase getProductsByStoreAndProductsIdUseCase,
-                              OrderRepository orderRepository) {
-        this.getProductsByStoreAndProductsIdUseCase = getProductsByStoreAndProductsIdUseCase;
-        this.orderRepository = orderRepository;
-    }
+    private final OrderRepository orderRepository;
+    private final ProductAccess productAccess;
 
     @Override
     public OutputValues execute(InputValues input) {
@@ -63,12 +59,7 @@ public class CreateOrderUseCase extends UseCase<CreateOrderUseCase.InputValues, 
     }
 
     private Map<Identity, Product> getProducts(InputValues input) {
-        GetProductsByStoreAndProductsIdUseCase.InputValues inputValues =
-                new GetProductsByStoreAndProductsIdUseCase.InputValues(
-                        input.getStoreId(), createListOfProductsId(input.getOrderItems()));
-
-        return getProductsByStoreAndProductsIdUseCase.execute(inputValues)
-                .getProducts()
+        return productAccess.getProducts(input.getStoreId(), createListOfProductsId(input.getOrderItems()))
                 .stream()
                 .collect(Collectors.toMap(Product::getId, Function.identity()));
     }

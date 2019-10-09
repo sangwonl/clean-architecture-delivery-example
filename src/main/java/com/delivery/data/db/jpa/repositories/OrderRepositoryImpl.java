@@ -4,17 +4,15 @@ import com.delivery.core.domain.Identity;
 import com.delivery.core.domain.Order;
 import com.delivery.core.usecases.order.OrderRepository;
 import com.delivery.data.db.jpa.entities.OrderData;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
+@RequiredArgsConstructor
 public class OrderRepositoryImpl implements OrderRepository {
-    private JpaOrderRepository repository;
-
-    public OrderRepositoryImpl(JpaOrderRepository repository) {
-        this.repository = repository;
-    }
+    private final JpaOrderRepository repository;
 
     @Override
     public Order persist(Order order) {

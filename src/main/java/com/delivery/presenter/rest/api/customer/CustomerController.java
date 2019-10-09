@@ -11,6 +11,7 @@ import com.delivery.presenter.usecases.security.AuthenticateCustomerUseCaseInput
 import com.delivery.presenter.usecases.security.AuthenticateCustomerUseCaseOutputMapper;
 import com.delivery.presenter.usecases.security.CreateCustomerInputMapper;
 import com.delivery.presenter.usecases.security.CreateCustomerUseCaseOutputMapper;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,21 +21,12 @@ import javax.validation.Valid;
 import java.util.concurrent.CompletableFuture;
 
 @Component
+@RequiredArgsConstructor
 public class CustomerController implements CustomerResource {
-    private UseCaseExecutor useCaseExecutor;
-    private CreateCustomerUseCase createCustomerUseCase;
-    private CreateCustomerInputMapper createCustomerUseCaseInputMapper;
-    private AuthenticateCustomerUseCase authenticateCustomerUseCase;
-
-    public CustomerController(UseCaseExecutor useCaseExecutor,
-                              CreateCustomerUseCase createCustomerUseCase,
-                              CreateCustomerInputMapper createCustomerUseCaseInputMapper,
-                              AuthenticateCustomerUseCase authenticateCustomerUseCase) {
-        this.useCaseExecutor = useCaseExecutor;
-        this.createCustomerUseCase = createCustomerUseCase;
-        this.createCustomerUseCaseInputMapper = createCustomerUseCaseInputMapper;
-        this.authenticateCustomerUseCase = authenticateCustomerUseCase;
-    }
+    private final UseCaseExecutor useCaseExecutor;
+    private final CreateCustomerUseCase createCustomerUseCase;
+    private final CreateCustomerInputMapper createCustomerUseCaseInputMapper;
+    private final AuthenticateCustomerUseCase authenticateCustomerUseCase;
 
     @Override
     public CompletableFuture<ResponseEntity<ApiResponse>> signUp(@Valid @RequestBody SignUpRequest signUpRequest,

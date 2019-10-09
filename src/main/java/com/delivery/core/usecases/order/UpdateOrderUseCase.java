@@ -4,14 +4,12 @@ import com.delivery.core.domain.Identity;
 import com.delivery.core.domain.NotFoundException;
 import com.delivery.core.domain.Order;
 import com.delivery.core.usecases.UseCase;
+import lombok.RequiredArgsConstructor;
 import lombok.Value;
 
+@RequiredArgsConstructor
 public abstract class UpdateOrderUseCase extends UseCase<UpdateOrderUseCase.InputValues, UpdateOrderUseCase.OutputValues> {
-    protected OrderRepository repository;
-
-    protected UpdateOrderUseCase(OrderRepository repository) {
-        this.repository = repository;
-    }
+    protected final OrderRepository repository;
 
     @Override
     public OutputValues execute(InputValues input) {

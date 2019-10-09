@@ -2,16 +2,14 @@ package com.delivery.core.usecases.product;
 
 import com.delivery.core.domain.Product;
 import com.delivery.core.usecases.UseCase;
+import lombok.RequiredArgsConstructor;
 import lombok.Value;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 public class GetAllProductsUseCase extends UseCase<GetAllProductsUseCase.InputValues, GetAllProductsUseCase.OutputValues> {
-    private ProductRepository repository;
-
-    public GetAllProductsUseCase(ProductRepository repository) {
-        this.repository = repository;
-    }
+    private final ProductRepository repository;
 
     @Override
     public OutputValues execute(InputValues input) {

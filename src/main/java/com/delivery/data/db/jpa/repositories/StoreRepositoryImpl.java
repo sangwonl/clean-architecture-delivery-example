@@ -6,6 +6,7 @@ import com.delivery.core.domain.Store;
 import com.delivery.core.usecases.store.StoreRepository;
 import com.delivery.data.db.jpa.entities.ProductData;
 import com.delivery.data.db.jpa.entities.StoreData;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,12 +14,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
+@RequiredArgsConstructor
 public class StoreRepositoryImpl implements StoreRepository {
-    private JpaStoreRepository repository;
-
-    public StoreRepositoryImpl(JpaStoreRepository repository) {
-        this.repository = repository;
-    }
+    private final JpaStoreRepository repository;
 
     @Override
     public List<Store> getAll() {

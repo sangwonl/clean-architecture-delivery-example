@@ -6,6 +6,7 @@ import com.delivery.core.usecases.product.GetAllProductsUseCase;
 import com.delivery.core.usecases.product.GetProductUseCase;
 import com.delivery.core.usecases.product.SearchProductsByNameOrDescriptionUseCase;
 import com.delivery.presenter.rest.api.entities.ProductResponse;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -13,21 +14,12 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @Component
+@RequiredArgsConstructor
 public class ProductController implements ProductResource {
-    private UseCaseExecutor useCaseExecutor;
-    private GetAllProductsUseCase getAllProductsUseCase;
-    private GetProductUseCase getProductUseCase;
-    private SearchProductsByNameOrDescriptionUseCase searchProductsByNameOrDescriptionUseCase;
-
-    public ProductController(UseCaseExecutor useCaseExecutor,
-                             GetAllProductsUseCase getAllProductsUseCase,
-                             GetProductUseCase getProductUseCase,
-                             SearchProductsByNameOrDescriptionUseCase searchProductsByNameOrDescriptionUseCase) {
-        this.useCaseExecutor = useCaseExecutor;
-        this.getAllProductsUseCase = getAllProductsUseCase;
-        this.getProductUseCase = getProductUseCase;
-        this.searchProductsByNameOrDescriptionUseCase = searchProductsByNameOrDescriptionUseCase;
-    }
+    private final UseCaseExecutor useCaseExecutor;
+    private final GetAllProductsUseCase getAllProductsUseCase;
+    private final GetProductUseCase getProductUseCase;
+    private final SearchProductsByNameOrDescriptionUseCase searchProductsByNameOrDescriptionUseCase;
 
     @Override
     public CompletableFuture<List<ProductResponse>> getAllProducts() {

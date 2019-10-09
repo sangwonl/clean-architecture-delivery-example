@@ -4,14 +4,12 @@ import com.delivery.core.domain.Customer;
 import com.delivery.core.domain.Identity;
 import com.delivery.core.domain.Order;
 import com.delivery.core.usecases.UseCase;
+import lombok.RequiredArgsConstructor;
 import lombok.Value;
 
+@RequiredArgsConstructor
 public class GetCustomerOrderUseCase extends UseCase<GetCustomerOrderUseCase.InputValues, GetCustomerOrderUseCase.OutputValues> {
-    private GetOrderUseCase getOrderUseCase;
-
-    public GetCustomerOrderUseCase(GetOrderUseCase getOrderUseCase) {
-        this.getOrderUseCase = getOrderUseCase;
-    }
+    private final GetOrderUseCase getOrderUseCase;
 
     @Override
     public OutputValues execute(InputValues input) {

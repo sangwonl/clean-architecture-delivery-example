@@ -2,18 +2,14 @@ package com.delivery.core.usecases.product;
 
 import com.delivery.core.domain.Product;
 import com.delivery.core.usecases.UseCase;
+import lombok.RequiredArgsConstructor;
 import lombok.Value;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
+@RequiredArgsConstructor
 public class SearchProductsByNameOrDescriptionUseCase extends UseCase<SearchProductsByNameOrDescriptionUseCase.InputValues, SearchProductsByNameOrDescriptionUseCase.OutputValues> {
-    private ProductRepository repository;
-
-    public SearchProductsByNameOrDescriptionUseCase(ProductRepository repository) {
-        this.repository = repository;
-    }
+    private final ProductRepository repository;
 
     @Override
     public OutputValues execute(InputValues input) {

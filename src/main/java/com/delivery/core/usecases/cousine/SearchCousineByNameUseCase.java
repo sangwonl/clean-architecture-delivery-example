@@ -2,17 +2,15 @@ package com.delivery.core.usecases.cousine;
 
 import com.delivery.core.domain.Cousine;
 import com.delivery.core.usecases.UseCase;
+import lombok.RequiredArgsConstructor;
 import lombok.Value;
 
 import java.util.List;
 
+@RequiredArgsConstructor
 public class SearchCousineByNameUseCase extends UseCase<SearchCousineByNameUseCase.InputValues, SearchCousineByNameUseCase.OutputValues> {
 
-    private CousineRepository repository;
-
-    public SearchCousineByNameUseCase(CousineRepository repository) {
-        this.repository = repository;
-    }
+    private final CousineRepository repository;
 
     @Override
     public OutputValues execute(InputValues input) {
