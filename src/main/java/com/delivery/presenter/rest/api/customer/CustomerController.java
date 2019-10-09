@@ -9,8 +9,6 @@ import com.delivery.presenter.rest.api.entities.SignUpRequest;
 import com.delivery.presenter.usecases.security.AuthenticateCustomerUseCase;
 import com.delivery.presenter.usecases.security.AuthenticateCustomerUseCaseInputMapper;
 import com.delivery.presenter.usecases.security.AuthenticateCustomerUseCaseOutputMapper;
-import com.delivery.presenter.usecases.security.CreateCustomerInputMapper;
-import com.delivery.presenter.usecases.security.CreateCustomerUseCaseOutputMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;

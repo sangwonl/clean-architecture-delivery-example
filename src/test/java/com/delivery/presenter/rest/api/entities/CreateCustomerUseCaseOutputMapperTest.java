@@ -2,7 +2,7 @@ package com.delivery.presenter.rest.api.entities;
 
 import com.delivery.core.domain.Customer;
 import com.delivery.core.entities.TestCoreEntityGenerator;
-import com.delivery.presenter.usecases.security.CreateCustomerUseCaseOutputMapper;
+import com.delivery.presenter.rest.api.customer.CreateCustomerUseCaseOutputMapper;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

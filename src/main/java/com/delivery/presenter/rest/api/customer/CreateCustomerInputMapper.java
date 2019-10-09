@@ -1,4 +1,4 @@
-package com.delivery.presenter.usecases.security;
+package com.delivery.presenter.rest.api.customer;
 
 import com.delivery.core.usecases.customer.CreateCustomerUseCase;
 import com.delivery.presenter.rest.api.entities.SignUpRequest;

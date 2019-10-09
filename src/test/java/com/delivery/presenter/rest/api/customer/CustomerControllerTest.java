@@ -10,7 +10,6 @@ import com.delivery.presenter.rest.api.entities.SignUpRequest;
 import com.delivery.presenter.usecases.UseCaseExecutorImpl;
 import com.delivery.presenter.usecases.security.AuthenticateCustomerUseCase;
 import com.delivery.presenter.usecases.security.AuthenticateCustomerUseCaseInputMapper;
-import com.delivery.presenter.usecases.security.CreateCustomerInputMapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
