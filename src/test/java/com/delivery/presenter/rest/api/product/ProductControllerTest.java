@@ -13,6 +13,7 @@ import com.delivery.presenter.usecases.UseCaseExecutorImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
@@ -34,7 +35,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(value = ProductController.class, secure = false)
+@WebMvcTest(ProductController.class)
+@AutoConfigureMockMvc(addFilters = false) 
 public class ProductControllerTest extends BaseControllerTest {
 
     @Configuration
@@ -79,7 +81,7 @@ public class ProductControllerTest extends BaseControllerTest {
         // then
         mockMvc.perform(payload)
                 .andExpect(status().isNotFound())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.success", is(false)))
                 .andExpect(jsonPath("$.message", is("Error")));
     }
@@ -104,7 +106,7 @@ public class ProductControllerTest extends BaseControllerTest {
         // then
         mockMvc.perform(payload)
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$.[0].id", is(product.getId().getNumber().intValue())))
                 .andExpect(jsonPath("$.[0].name", is(product.getName())))
@@ -134,7 +136,7 @@ public class ProductControllerTest extends BaseControllerTest {
         // then
         mockMvc.perform(payload)
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$.[0].id", is(product.getId().getNumber().intValue())))
                 .andExpect(jsonPath("$.[0].name", is(product.getName())))
@@ -162,7 +164,7 @@ public class ProductControllerTest extends BaseControllerTest {
         // then
         mockMvc.perform(payload)
                 .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id", is(product.getId().getNumber().intValue())))
                 .andExpect(jsonPath("$.name", is(product.getName())))
                 .andExpect(jsonPath("$.description", is(product.getDescription())))

@@ -24,21 +24,18 @@ public abstract class BaseControllerTest {
     }
 
     protected RequestBuilder asyncGetRequest(String url) throws Exception {
-        return asyncDispatch(getMockMvc().perform(get(url))
-                .andExpect(request().asyncStarted())
-                .andReturn());
+        return asyncDispatch(getMockMvc().perform(get(url)).andExpect(request().asyncStarted()).andReturn());
     }
 
     private RequestBuilder methodRequestBuilder(String token, MockHttpServletRequestBuilder method) throws Exception {
         return asyncDispatch(getMockMvc().perform(method.header("Authorization", "Bearer " + token))
-                .andExpect(request().asyncStarted())
-                .andReturn());
+                .andExpect(request().asyncStarted()).andReturn());
     }
 
     protected RequestBuilder asyncPostRequest(String url, String payload, String token) throws Exception {
         // @formatter:off
         MockHttpServletRequestBuilder content = post(url)
-                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON)
                 .content(payload)
                 .header("Authorization", "Bearer " + token);
 
@@ -53,7 +50,7 @@ public abstract class BaseControllerTest {
         // @formatter:off
         return asyncDispatch(
                 getMockMvc().perform(
-                        post(url).contentType(MediaType.APPLICATION_JSON_UTF8).content(payload))
+                        post(url).contentType(MediaType.APPLICATION_JSON).content(payload))
                 .andExpect(request().asyncStarted())
                 .andReturn());
         // @formatter:on
